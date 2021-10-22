@@ -9,10 +9,10 @@
 <body>
     <style>
         .highlight {
-            background-color: #63a74c;
+            background-color: black;
+            color: white;
             border-radius: 4px;
             padding: 2px 3px 3px 3px;
-            
         }
 
         body {
@@ -165,13 +165,14 @@
             search.value = params.regex;
         }
 
+        if (params.placeholder != null){
+            search.placeholder = params.placeholder;
+        }
+
         if (params.text != null){
             caixaPalavras.innerHTML = params.text;
         }
 
-
-        
-        
 
         search.addEventListener('input', function (evt) {
             const searchText = event.target.value;
