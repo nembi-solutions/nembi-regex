@@ -16,3 +16,9 @@ Parâmetros:
 - ```regex```: Valor para preenchimento automatico do campos de regex
 - ```text```: Texto da caixa de treinamento de Regex
 - ```placeholder```: Valor do placeholder do input de escrita do Regex
+
+
+## Backlog
+
+- Implementar função de "Mostrar Reposta" para automaticamente preencher o campo de Regex com o Regex solicitado.
+- Atualizar logotipo NS para logotipo NS Regex
