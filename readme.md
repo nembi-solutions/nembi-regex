@@ -5,10 +5,10 @@ Um projeto em Javascript para treinamento no uso de Regex.
 
 
 
-Exemplo
+Exemplo de Uso:
 
 ```
-http://127.0.0.1:3002/index.html?regex=A&text=Novo%20Texto&placeholder=Digite um Regex
+https://nembi-solutions.github.io/nembi-regex/index.html?regex=A&text=Novo%20Texto&placeholder=Digite um Regex
 ```
 
 Parâmetros:
