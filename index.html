@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+    <title>Exercícios de Regex</title>
+</head>
+
+<body>
+    <style>
+        .highlight {
+            background-color: #63a74c;
+            border-radius: 4px;
+            padding: 2px 3px 3px 3px;
+            
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 500px;
+            padding: 0 2%;
+        }
+
+        .search-container {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            margin: 10px auto 20px auto;
+            width: 500px;
+        }
+        .input-container{
+            display: inline-block;
+            height: 38px;
+            margin-top: 15px;
+        }
+
+        .input-container > img{
+            display: inline-block;
+            vertical-align: middle;
+            border: 3px solid black;
+            border-radius: 5px;
+            background-color: black;
+        }
+
+        .text-container {
+            background-color: #F1F1F1;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+
+        label {
+            color: black;
+            font-family: 'Dosis', sans-serif;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 5px;
+    
+        }
+
+        input {
+            background: #fff;
+            border: 1px solid #535353;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            height: 38px;
+            line-height: 38px;
+            outline: none;
+            padding: 0 10px;
+            transition: all 0.5s;
+            width: 85%;
+            margin-top: 0px !important;
+        }
+
+        input {
+            border: 2px solid black;
+            margin-top: 5px;
+        }
+
+        blockquote {
+
+            background-color: #f1f1f1;
+            border-radius: 0 4px 4px 0;
+            color: #515151;
+            font-style: italic;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px 60px 20px 20px;
+            position: relative;
+        }
+
+        blockquote::before {
+            color: #ccc;
+            border-radius: 10px;
+            font-size: 80px;
+            position: absolute;
+            right: 30px;
+            top: -20px;
+        }
+    </style>
+
+
+
+    <div class="container">
+        <div class="search-container">
+            <!--<label for="search">Digite um padrão REGEX</label>-->
+            <div class="input-container">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAjpQTFRFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAgICCQkJCgoKCAgIBwcHDAwMJiYmLCwsJCQkDQ0NFBQUBQUFAwMDg4OD0NDQ09PT1NTUycnJMjIyDg4OnZ2dv7+/zMzMysrKpKSkFhYWWFhY8PDw9fX17+/vaGhowMDANjY2JSUlbW1t////zc3NGRkZFRUVKioqoaGhwcHBMTExjY2N+fn55eXlh4eHXl5edHR0x8fH8/Pz/f39U1NTi4uL/v7+q6urCwsLPDw8+/v7XFxcVFRU9/f3Pz8/cXFx8fHxeXl5/Pz8gYGBBAQE+vr6V1dXBgYGubm5xsbGZWVlcnJy0tLSVVVV19fXxcXFt7e3vLy8dXV15+fn2tra5ubmNTU11tbWTExMWVlZ0dHRc3NzHBwcQEBA7e3tz8/PGhoarq6u4ODgREREEBAQZ2dnra2tNDQ0QUFBjo6OFxcX6OjolZWVgoKCDw8Pa2tr7u7uUFBQHR0dEhIS9vb2MzMzw8PDoKCg3NzcWlpaERERISEhkZGR7OzsQ0NDZGRk29vbPj4+6enpampqr6+vPT09+Pj4W1tbdnZ2yMjIm5ubsrKyGxsbbGxsHh4eXV1dOzs7KCgo3t7erKysRkZGT09POTk5SEhI39/f4eHhvb29UVFR5OTknJycnp6eLi4u8vLyfX19KysrExMTvr6+gICAfn5+2NjY3d3d6urqo6OjJycnNzc3UlJSSUlJtKr/0AAAAL50Uk5TAAciMTMGA0DC7v3/a/T//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////yURQrAAAAMJSURBVHic7Zf5VxJRFMcFVMCnbwRSDHLBLbe0bmomrtSklWSGYqu55QKaLWZmi4lmmS22qKVZWtm+2r79bz2YAWMY7QB2jp3D/WlmeN/PffN99w7n+vktSQiEIn83QyQMcMgDxRJpEHIzgqQScSCrDw5xV81ESDBDEHuoJwSxVR8g8VSPkERAAEKp5wCpkABEbvs3H0EiAvD3XI+Qvw/gAyxTAP5r/DsAFSqThWJkW4DlJBRyufNq8nxFWLgyAqOVKleAelVkVHSMhskQGxefkJAYvzrJWS9PTkhJTYtco0nP4AGsXZcGsD6TyZSVvQFyNmZSzvpcbV5+QWGRtli3ic8D9WYAeksJe1e6dRvnBfD2sjQ9QUbsKIedvCYWAkDFLgNzk1FZxTHAWA27ZbZMe7RxmA+wN2UfQOp+CvMDYg9AjQ2AQg/WqvkAdfX6BoBGjQ1wqDKZC2iC4mbmkFpaZXwAU725rR3gcIczgD16bDwCcPSYLfVxPe8OCuvNVKcW6BNWI7u0LawcU+xhnCT08u5Tfx4NB9BjRsbTOqg4Y0DYDlDm1p1l92A410vOKfq8YmFAH0KWeID+KgoPMADZBagwYSYpVjU36civg314EQAKuwjQ00Ve4ZL12RCxtdvRAPjy8BUa6Ci7BbwAfJVUZGvHAAPA164XZTsSYqQYqdUC5LXxA25YAYi6SYy8dXt0zPaQspQ4V+TQOHHizhAfoI4BIMVdYuSEdsxJh/CkrQUxVt0bhf4RfsAUc2HJIUUN950BiuoHLMkSBXTnogA0PeMKwA8HjcyVagLAFYCtHkwhtuoelQMUcLrRVPwYs3uBslkeAM5vV9rrVm2q5O4APdE91autn6zpZ/DctReoyRcvda80SWxa+WuaC3jzlm58935urjSdbghHroDxmsSYmA8f7SWSlcNtZ3PDp+HPjTNfer9++45dAaTbrGFwrJ+L5QCMs0bK8uPn2C/l/KLl+M/kA/gA/y3A64HD65FH4M3QFbAUY5/3g6fXo691+PRk+Ba4Nd8vGL8Bak8hvMELU20AAAAASUVORK5CYII=" width="32px">
+                <input id="search" placeholder="Digite Pormade por exemplo" type="search" autocomplete="off" />
+            </div>
+        </div>
+        <div class="text-container">
+            <figure>
+                <blockquote id="caixaPalavras">
+                    Número CEP Pormade Teste 4489ABC Tulio
+                </blockquote>
+            </figure>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    (function () {
+        const search = document.getElementById('search');
+        const caixaPalavras = document.getElementById('caixaPalavras');
+
+        function parse_query_string(query) {
+        var vars = query.split("&");
+        var query_string = {};
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            var key = decodeURIComponent(pair[0]);
+            var value = decodeURIComponent(pair[1]);
+            // If first entry with this name
+            if (typeof query_string[key] === "undefined") {
+            query_string[key] = decodeURIComponent(value);
+            // If second entry with this name
+            } else if (typeof query_string[key] === "string") {
+            var arr = [query_string[key], decodeURIComponent(value)];
+            query_string[key] = arr;
+            // If third or later entry with this name
+            } else {
+            query_string[key].push(decodeURIComponent(value));
+            }
+        }
+        return query_string;
+        }
+    
+        var params_string = window.location.search.substring(1);
+        
+        var params = parse_query_string(params_string);
+        console.log(params.regex);
+
+        if (params.regex != null){
+            search.value = params.regex;
+        }
+
+        if (params.text != null){
+            caixaPalavras.innerHTML = params.text;
+        }
+
+
+        
+        
+
+        search.addEventListener('input', function (evt) {
+            const searchText = event.target.value;
+            const regex = new RegExp(searchText, 'gi');
+
+            let text = caixaPalavras.innerHTML;
+            text = text.replace(/(<mark class="highlight">|<\/mark>)/gim, '');
+
+            const newText = text.replace(regex, '<mark class="highlight">$&</mark>');
+            caixaPalavras.innerHTML = newText;
+        });
+    })();
+</script>
+
+</html>
